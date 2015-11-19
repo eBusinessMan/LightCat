@@ -6,7 +6,7 @@ import java.util.Collection;
 import com.lightcat.cookie.Cookie;
 
 /**
- * 封装了常用的响应方法
+ * 灏佽浜嗗父鐢ㄧ殑鍝嶅簲鏂规硶
  * @author LuoZhixiao
  *
  */
