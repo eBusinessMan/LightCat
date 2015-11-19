@@ -5,9 +5,7 @@ import java.util.Collection;
 
 import com.lightcat.cookie.Cookie;
 
-public interface HttpResponse
-    extends Response
-{
+public interface HttpResponse extends Response {
 
     public abstract void addCookie(Cookie cookie);
 
