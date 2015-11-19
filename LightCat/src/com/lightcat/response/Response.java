@@ -3,8 +3,12 @@ package com.lightcat.response;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
-import java.util.Locale;
 
+/**
+ * ×î¶¥½Ó¿Ú
+ * @author LuoZhixiao
+ *
+ */
 public interface Response
 {
 

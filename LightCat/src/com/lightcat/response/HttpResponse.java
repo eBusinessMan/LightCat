@@ -5,6 +5,11 @@ import java.util.Collection;
 
 import com.lightcat.cookie.Cookie;
 
+/**
+ * 封装了常用的响应方法
+ * @author LuoZhixiao
+ *
+ */
 public interface HttpResponse extends Response {
 
     public abstract void addCookie(Cookie cookie);
