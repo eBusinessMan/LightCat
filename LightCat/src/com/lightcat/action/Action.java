@@ -25,6 +25,6 @@ public interface Action {
 
 	void doDelete(LightCatRequest req, LightCatResponse resp)throws IOException;
 
-	void handle();
+	void handle(LightCatRequest req, LightCatResponse resp) throws IOException;
 
 }

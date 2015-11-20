@@ -3,6 +3,7 @@ package com.lightcat.response.impl;
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
@@ -10,6 +11,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Locale;
 import com.lightcat.cookie.Cookie;
+import com.lightcat.response.HttpContentType;
 import com.lightcat.response.HttpResponse;
 
 /**
@@ -20,6 +22,7 @@ import com.lightcat.response.HttpResponse;
 public class LightCatResponse implements HttpResponse {
 	private OutputStream os;
 
+	private boolean hasSentHeader = false ;
 	//响应头集合
 	private HashMap<String , String> responseHeaderMap = null ;
 	//预定义 响应行
@@ -206,11 +209,33 @@ public class LightCatResponse implements HttpResponse {
 	}
 
 	/**
-	 * 将请求文件发送给客户端
+	 * 将请求文件发送给客户端:当访问静态资源时
+	 * @throws IOException 
 	 */
-	public void write(File targetFile) {
+	public void write(File targetFile) throws IOException {
 		// TODO Auto-generated method stub
+		String fileName = targetFile.getName();
+		String postfix = fileName.substring(fileName.lastIndexOf('.'));
+		this.setHeader("Content-Type", HttpContentType.checkContentType(postfix));
+		this.setHeader("Content-Length", ""+targetFile.length());
+		this.getOutputStream().write(this.toString().getBytes());
 		
+		FileInputStream fis = new FileInputStream(targetFile); 
+		int len = 0;
+		byte[] temp = new byte[1024];
+		while((len = fis.read(temp))!= -1){
+			this.getOutputStream().write(temp , 0 ,len);
+		}
 	}
-
+	
+	/**用于用户断断嘘嘘输出文本
+	 * @param source
+	 * @throws IOException
+	 */
+	public void write(byte[] source) throws IOException{
+		if(!this.hasSentHeader){
+			this.getOutputStream().write(this.toString().getBytes());
+		}
+		this.getOutputStream().write(source);
+	}
 }

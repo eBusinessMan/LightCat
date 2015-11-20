@@ -1,6 +1,7 @@
 package com.lightcat.common.urltree;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +23,7 @@ public class UrlTreeNode {
 	 * 递归匹配并处理url
 	 * @param urlLinkNode
 	 */
-	public boolean handle(UrlLinkNode urlLinkNode){
+	public boolean handle(UrlLinkNode urlLinkNode) throws IOException{
 		if(matchUrlSegment(urlLinkNode)){//如果此url节点匹配
 			//此节点过滤
 			this.pre_FilterChain.doFilter(urlLinkNode.getRequest(), urlLinkNode.getResponse(), this.pre_FilterChain);
@@ -39,7 +40,7 @@ public class UrlTreeNode {
 				if(targetFile.exists()){//如果是具体的文件：如js，css,html等...
 					urlLinkNode.getResponse().write(targetFile);
 				}else{//如果是Action
-					this.getAction().handle();
+					this.getAction().handle(urlLinkNode.getRequest() , urlLinkNode.getResponse());
 				}
 			}
 			
