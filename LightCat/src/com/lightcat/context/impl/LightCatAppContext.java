@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -30,6 +31,14 @@ public class LightCatAppContext implements AppContext {
 
 	private String file404 ;//404页面，从配置文件中读取，如果用户有配置的话
 	private String fileError ; //error页面，从配置文件中读取，如果用户有配置的话
+	private ArrayList<String> fileWelcome ;//欢迎页面:
+	
+	
+	/**
+	 * 封装了本appcontext对应的配置文件
+	 * 待完善......
+	 */
+	private String DOM ; 
 	
 	public LightCatAppContext(Host parentHost) {
 		this.parentHost = parentHost;
@@ -91,6 +100,14 @@ public class LightCatAppContext implements AppContext {
 
 	public void setContextName(String contextName) {
 		ContextName = contextName;
+	}
+
+	public ArrayList<String> getFileWelcome() {
+		return fileWelcome;
+	}
+
+	public void setFileWelcome(ArrayList<String> fileWelcome) {
+		this.fileWelcome = fileWelcome;
 	}
 
 }
