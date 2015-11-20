@@ -166,6 +166,12 @@ public class LightCatAppContext implements AppContext {
 		}
 		this.attributeMap.remove(s);
 	}
+
+	@Override
+	public String getRealPath() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 
 }

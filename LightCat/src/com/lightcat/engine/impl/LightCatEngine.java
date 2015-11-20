@@ -46,7 +46,7 @@ public class LightCatEngine implements Engine{
 	@Override
 	public void handle(LightCatRequest request , LightCatResponse response) {
 		// TODO Auto-generated method stub
-		Host host = (Host) hostMap.get(request.getRemoteHost());
+		Host host = (Host) hostMap.get(request.getHeader("Host"));
 		host.handle(request, response);
 	}
 }
