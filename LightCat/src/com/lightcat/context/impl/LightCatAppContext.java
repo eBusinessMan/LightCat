@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -14,13 +15,17 @@ import com.lightcat.common.urltree.UrlLinkNode;
 import com.lightcat.common.urltree.UrlTreeNode;
 import com.lightcat.context.AppContext;
 import com.lightcat.host.Host;
+import com.lightcat.listener.event.impl.AttributeEvent;
+import com.lightcat.listener.impl.AppContextAttributeListener;
+import com.lightcat.listener.impl.AppContextLifecycleListener;
 import com.lightcat.request.impl.LightCatRequest;
 import com.lightcat.response.impl.LightCatResponse;
 
 /**
  * 代表着部署在host下的开发者的webapp
- * 
  * @author LuoZhixiao
+ * 
+ * 一个想法：后期会抽离出注册各scope的各种监听器的代码独立出来
  */
 public class LightCatAppContext implements AppContext {
 	final Host parentHost;
@@ -33,12 +38,16 @@ public class LightCatAppContext implements AppContext {
 	private String fileError ; //error页面，从配置文件中读取，如果用户有配置的话
 	private ArrayList<String> fileWelcome ;//欢迎页面:
 	
+	private AppContextLifecycleListener lifecycleListener ;
+	private AppContextAttributeListener attributeListener ;
 	
 	/**
 	 * 封装了本appcontext对应的配置文件
 	 * 待完善......
 	 */
-	private String DOM ; 
+	private String DOM ;
+	
+	private HashMap<String , Object> attributeMap = new HashMap<String , Object>(); 
 	
 	public LightCatAppContext(Host parentHost) {
 		this.parentHost = parentHost;
@@ -61,7 +70,6 @@ public class LightCatAppContext implements AppContext {
 		if (!request.isHasHandle()) {
 			response.return404(new File(file404));
 		}
-
 	}
 
 	public UrlLinkNode createRequestUrlLink(LightCatRequest request) {
@@ -109,5 +117,55 @@ public class LightCatAppContext implements AppContext {
 	public void setFileWelcome(ArrayList<String> fileWelcome) {
 		this.fileWelcome = fileWelcome;
 	}
+	
+	/**
+	 * 注册属性状态监听器
+	 * @param attributeListener
+	 */
+	public void registerAttributeListener(AppContextAttributeListener attributeListener){
+		this.attributeListener = attributeListener;
+	}
+	/**注册生命周期监听器
+	 * @param lifecycleListener
+	 */
+	public void registerLifecycleListener(AppContextLifecycleListener lifecycleListener){
+		this.lifecycleListener = lifecycleListener;
+		this.lifecycleListener.scopeCreated();//一旦注册就得执行此方法。
+	}
+
+	@Override
+	public Enumeration getAttributeNames() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setAttribute(String s, Object obj) {
+		// TODO Auto-generated method stub
+		if(attributeMap.get(s) != null){//修改属性
+			this.attributeListener.attributeModified(new AttributeEvent(this,s,obj));
+		}else{//添加新属性
+			if(this.attributeListener != null){
+				this.attributeListener.attributeAdded(new AttributeEvent(this,s,obj));
+			}
+		}
+		this.attributeMap.put(s, obj);
+	}
+
+	@Override
+	public Object getAttribute(String s) {
+		// TODO Auto-generated method stub
+		return this.attributeMap.get(s);
+	}
+
+	@Override
+	public void removeAttribute(String s) {
+		// TODO Auto-generated method stub
+		if(this.attributeListener != null){
+			this.attributeListener.attributeRemoved(new AttributeEvent(this,s,null));
+		}
+		this.attributeMap.remove(s);
+	}
+	
 
 }

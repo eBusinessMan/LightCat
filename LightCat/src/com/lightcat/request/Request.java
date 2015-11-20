@@ -12,7 +12,15 @@ import com.lightcat.context.impl.LightCatAppContext;
 
 public interface Request
 {
+	public Object getAttribute(String s) ;
 
+	public Enumeration getAttributeNames() ;
+	
+	public void setAttribute(String s, Object obj) ;
+	
+	public void removeAttribute(String s) ;
+
+	/*
     public abstract Object getAttribute(String s);
 
     public abstract Enumeration getAttributeNames();
@@ -64,12 +72,6 @@ public interface Request
 
 //    public abstract RequestDispatcher getRequestDispatcher(String s);
 
-    /**
-     * @deprecated Method getRealPath is deprecated
-     */
-
-    public abstract String getRealPath(String s);
-
     public abstract int getRemotePort();
 
     public abstract String getLocalName();
@@ -80,7 +82,6 @@ public interface Request
 
     public abstract LightCatAppContext getAppContext();
 
-/*    public abstract AsyncContext startAsync()
         throws IllegalStateException;
 
     public abstract AsyncContext startAsync(ServletRequest servletrequest, ServletResponse servletresponse)
@@ -92,5 +93,6 @@ public interface Request
 
     public abstract AsyncContext getAsyncContext();
 
-    public abstract DispatcherType getDispatcherType();*/
+    public abstract DispatcherType getDispatcherType();
+    */
 }

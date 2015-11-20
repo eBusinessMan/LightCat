@@ -3,13 +3,11 @@ package com.lightcat.listener.impl;
 import com.lightcat.listener.AttributeListener;
 import com.lightcat.listener.event.impl.AttributeEvent;
 
-/**
- * appContextµÄÊôĞÔ×´Ì¬¼àÌı
+/**requestÊôĞÔ×´Ì¬¼àÌıÆ÷
  * @author LuoZhixiao
  *
  */
-public abstract class AppContextAttributeListener implements AttributeListener {
-
+public abstract class RequestAttributeListener implements AttributeListener {
 	@Override
 	public void attributeAdded(AttributeEvent attributeEvent) {
 		// TODO Auto-generated method stub
@@ -27,5 +25,4 @@ public abstract class AppContextAttributeListener implements AttributeListener {
 		// TODO Auto-generated method stub
 		
 	}
-
 }

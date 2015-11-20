@@ -3,6 +3,10 @@ package com.lightcat.listener.impl;
 import com.lightcat.listener.AttributeListener;
 import com.lightcat.listener.event.impl.AttributeEvent;
 
+/**sessionÊôĞÔ×´Ì¬¼àÌıÆ÷
+ * @author LuoZhixiao
+ *
+ */
 public abstract class SessionAttributeListener implements AttributeListener {
 	@Override
 	public void attributeAdded(AttributeEvent attributeEvent) {
@@ -21,6 +25,4 @@ public abstract class SessionAttributeListener implements AttributeListener {
 		// TODO Auto-generated method stub
 		
 	}
-	public void sessionCreated(){}
-	public void sessionDestroyed(){}
 }
