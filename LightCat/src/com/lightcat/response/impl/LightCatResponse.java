@@ -205,4 +205,12 @@ public class LightCatResponse implements HttpResponse {
 		this.statusDes = statusDes;
 	}
 
+	/**
+	 * 将请求文件发送给客户端
+	 */
+	public void write(File targetFile) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

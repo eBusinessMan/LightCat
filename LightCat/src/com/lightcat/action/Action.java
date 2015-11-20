@@ -10,6 +10,9 @@ import com.lightcat.response.impl.LightCatResponse;
  * @author LuoZhixiao
  */
 public interface Action {
+	void init();
+	void destroy();
+	
 	void doGet(LightCatRequest req, LightCatResponse resp) throws IOException;
 
 	long getLastModified(LightCatRequest req)throws IOException;
@@ -21,5 +24,7 @@ public interface Action {
 	void doPut(LightCatRequest req, LightCatResponse resp)throws IOException;
 
 	void doDelete(LightCatRequest req, LightCatResponse resp)throws IOException;
+
+	void handle();
 
 }

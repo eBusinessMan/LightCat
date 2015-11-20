@@ -147,6 +147,9 @@ public class LightCatRequest implements HttpRequest {
 		return this.session.getAppContext();
 	}
 
+	/**
+	 * 获取本appcontext（这个文件夹）的物理（绝对）路径
+	 */
 	@Override
 	public String getContextPath() {
 		// TODO Auto-generated method stub

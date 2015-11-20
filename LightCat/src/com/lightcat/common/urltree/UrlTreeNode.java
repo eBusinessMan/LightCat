@@ -1,5 +1,6 @@
 package com.lightcat.common.urltree;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,6 +33,13 @@ public class UrlTreeNode {
 					if(subUrlTreeNode.handle(urlLinkNode.getNext())){
 						break;
 					}
+				}
+			}else{
+				File targetFile = new File(""+urlLinkNode.getRequest().getContextPath()+File.separator+urlLinkNode.getRequest().getRequestURI());
+				if(targetFile.exists()){//如果是具体的文件：如js，css,html等...
+					urlLinkNode.getResponse().write(targetFile);
+				}else{//如果是Action
+					this.getAction().handle();
 				}
 			}
 			
