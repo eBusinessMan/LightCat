@@ -34,9 +34,9 @@ public class LightCatAppContext implements AppContext {
 	private UrlTreeNode urlTree_root;// url树的根
 										// ，此根的segName是“/本context名字”，即以“/本context名字”开始
 
-	private String file404 ;//404页面，从配置文件中读取，如果用户有配置的话
-	private String fileError ; //error页面，从配置文件中读取，如果用户有配置的话
-	private ArrayList<String> fileWelcome ;//欢迎页面:
+	private String file404 ;//404页面，从配置文件中读取，如果用户有配置的话：绝对路径
+	private String fileError ; //error页面，从配置文件中读取，如果用户有配置的话：绝对路径
+	private ArrayList<String> fileWelcome ;//欢迎页面:绝对路径
 	
 	private AppContextLifecycleListener lifecycleListener ;
 	private AppContextAttributeListener attributeListener ;
@@ -172,6 +172,22 @@ public class LightCatAppContext implements AppContext {
 	public String getRealPath() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public String getFile404() {
+		return file404;
+	}
+
+	public void setFile404(String file404) {
+		this.file404 = file404;
+	}
+
+	public String getFileError() {
+		return fileError;
+	}
+
+	public void setFileError(String fileError) {
+		this.fileError = fileError;
 	}
 	
 
