@@ -24,7 +24,7 @@ public class UrlTreeNode {
 	 * @param urlLinkNode
 	 */
 	public boolean handle(UrlLinkNode urlLinkNode) throws IOException{
-		if(matchUrlSegment(urlLinkNode)){//如果此url节点匹配
+		if(!urlLinkNode.getRequest().isHasHandle() && matchUrlSegment(urlLinkNode)){//如果此url节点匹配
 			//此节点过滤
 			this.pre_FilterChain.doFilter(urlLinkNode.getRequest(), urlLinkNode.getResponse(), this.pre_FilterChain);
 			

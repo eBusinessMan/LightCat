@@ -1,5 +1,6 @@
 package com.lightcat.engine.impl;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -44,7 +45,7 @@ public class LightCatEngine implements Engine{
 	}
 	
 	@Override
-	public void handle(LightCatRequest request , LightCatResponse response) {
+	public void handle(LightCatRequest request , LightCatResponse response) throws IOException {
 		// TODO Auto-generated method stub
 		Host host = (Host) hostMap.get(request.getHeader("Host"));
 		host.handle(request, response);

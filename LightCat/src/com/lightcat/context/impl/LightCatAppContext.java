@@ -58,9 +58,10 @@ public class LightCatAppContext implements AppContext {
 	 * 
 	 * @param request
 	 * @param response
+	 * @throws IOException 
 	 */
 	@Override
-	public void handle(LightCatRequest request, LightCatResponse response) {
+	public void handle(LightCatRequest request, LightCatResponse response) throws IOException {
 		// TODO Auto-generated method stub
 		UrlLinkNode urlLinkNode_root = createRequestUrlLink(request);
 		// 开始匹配路径并处理

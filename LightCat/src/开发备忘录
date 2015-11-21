@@ -1,1 +1,2 @@
 1.HttpContentType ： content-type待补充，暂时预置常见的
+2.LightCatAppContext一个想法：后期会抽离出注册各scope的各种监听器的代码独立出来

@@ -1,5 +1,6 @@
 package com.lightcat.host.impl;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -34,9 +35,10 @@ public class LightCatHost implements Host {
 	/**¥¶¿Ì«Î«Û
 	 * @param request
 	 * @param response
+	 * @throws IOException 
 	 */
 	@Override
-	public void handle(LightCatRequest request, LightCatResponse response) {
+	public void handle(LightCatRequest request, LightCatResponse response) throws IOException {
 		// TODO Auto-generated method stub
 		AppContext targetContext = (AppContext)appContextMap.get(request.getRequestURI().split("/")[1]);
 		targetContext.handle(request , response);
